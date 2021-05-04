@@ -84,6 +84,9 @@ class ToD(Application):
         self.filemenu.add_command(label="Edit the Reminder", command=self.ed_rem)
         self.filemenu.add_command(label="Delete the Reminder", command=self.del_rem)
         self.filemenu.add_separator()
+        self.filemenu.add_command(label="Save Configuration", command=self.to_file)
+        self.filemenu.add_command(label="Load Configuration", command=self.from_file)
+        self.filemenu.add_separator()
         self.filemenu.add_command(label="Change the Sound")
         self.filemenu.add_separator()
         self.filemenu.add_command(label="Go to Main Menu", command=self.go_back)
@@ -273,6 +276,41 @@ class ToD(Application):
             else:
                 self.new_num()
         self.im_count.set(len(self.imp_list))
+        
+    def to_file(self):
+        got_date = False
+        date = ''
+        important = False
+        with open('test.txt', 'w') as f:
+            for num, elem in enumerate(self.Rlist.get(0, self.Rlist.size())):
+                if (elem != ''):
+                    if (got_date):
+                        f.write(date+';'+elem+';'+str(important)+'\n')
+                        got_date = False
+                    else:
+                        date = elem
+                        important = int(num in self.imp_list)
+                        got_date = True
+
+    def from_file(self):
+        events = []
+        self.imp_list = []
+        num = 0
+        with open('test.txt', 'r') as f:
+            for line in f:
+                events.append('')
+                new_mas = line.split(';')
+                events.append(new_mas[0])
+                events.append(new_mas[1])
+                events.append('')
+                if (int(new_mas[2])):
+                    if 4*num+1 not in self.imp_list:
+                        self.imp_list.append(4*num+1)
+                num += 1
+        self.mas = events
+        self.list.set(self.mas)
+        self.set_imp()
+        self.new_num()
 
 
 
