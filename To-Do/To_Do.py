@@ -112,7 +112,6 @@ class ToD(Application):
         for number in self.imp_list:
             self.Rlist.itemconfig(number, foreground="red")
         self.im_count.set(len(self.imp_list))
-        #self.outdated_events()
 
     def go_back(self):
         """Return to main menu."""
@@ -155,10 +154,155 @@ class ToD(Application):
             check = self.Rlist.get(count + 1)
         return count
 
-    def ed_rem(self):
+     def ed_rem(self):
 
-        print("Edit!")
-        #TODO
+        def on_closing():
+            if changed():
+                if tk.messagebox.askyesno("Quit", "Do you want to quit?\nTo save the changes, you have to press OK"):
+                    ed_top.destroy()
+            else:
+                ed_top.destroy()
+
+        def changed():
+            new_time = datetime.time(int(hour.get()), int(minute.get()))
+            new_date = cal.get_date()
+            in_date = datetime.datetime(new_date.year, new_date.month, new_date.day,
+                                        new_time.hour, new_time.minute, new_time.second)
+            return (
+                (((cur_description) != (ent.get())) and (ent.get() != '')) or
+                (' '.join(cur_date_time) != str(in_date)) and (in_date)
+            )
+
+        def edit_list():
+
+            print(self.imp_list)
+
+            new_time = datetime.time(int(hour.get()), int(minute.get()))
+            new_date = cal.get_date()
+            in_date = datetime.datetime(new_date.year, new_date.month, new_date.day,
+                                        new_time.hour, new_time.minute, new_time.second)
+            old_date = self.mas.index(str(in_date))
+            if (old_date) in self.imp_list:
+                self.imp_list.remove(old_date)
+            del self.mas[old_date-1:old_date+3]
+
+            self.list.set(self.mas)
+
+            #self.color_change(old_date, -4)
+            date_put = self.date_in(in_date)
+
+            self.mas.insert(date_put, "")
+            self.mas.insert(date_put + 1, "{a} {b}".format(a=new_date, b=new_time))
+            self.mas.insert(date_put + 2, ent.get())
+            self.mas.insert(date_put + 3, "")
+
+            self.list.set(self.mas)
+            print("Old: {a}\nNew: {b}\nCompare: {c}\n".format(b=date_put+1, a=old_date, c=date_put<old_date))
+            forw = 2*(date_put+1<old_date)-1
+            print(forw)
+            for i in range(len(self.imp_list)):
+                if (min(old_date, date_put+1) <= self.imp_list[i] <= max(old_date, date_put+1)):
+                    print("number {a} is {b}. Changing thanks to {c}".format(a=i, b=self.imp_list[i], c=forw))
+                    self.imp_list[i] += forw*4
+                    print("New number is ", self.imp_list[i])
+            if (imp.get()):
+                self.imp_list.append(date_put+1)
+            print(self.imp_list)
+            self.set_imp()
+
+        def ed_sel():
+            if not (hour.get()) or not (minute.get()):
+                tk.messagebox.showerror("Time Error", "Input hours and minutes!")
+            else:
+                new_time = datetime.time(int(hour.get()), int(minute.get()))
+            if not (ent.get()):
+                tk.messagebox.showerror("Description Error", "Input the description!")
+            else:
+                new_rem = ent.get()
+            new_date = cal.get_date()
+            in_date = datetime.datetime(new_date.year, new_date.month, new_date.day,
+                                        new_time.hour, new_time.minute, new_time.second)
+            self.mas[4*num+1] = str(in_date)
+            self.mas[4*num+2] = new_rem
+            self.list.set(self.mas)
+            if (imp.get() != old_imp):
+                if (old_imp == 0):
+                    self.imp_list.append(4*num+1)
+                else:
+                    self.imp_list.remove(4*num+1)
+            self.set_imp()
+            self.new_num()
+            edit_list()
+            ed_top.destroy()
+
+        selected = self.Rlist.curselection()
+        new_select = set(i // 4 for i in selected)
+        if not (len(new_select)):
+            tkinter.messagebox.showerror("Edit Error", "Choose Reminder to Edit!")
+        elif (len(new_select) == 1):
+            num = new_select.pop()
+            ed_top = tk.Toplevel(self)
+            ed_top.resizable(False, False)
+            ed_top.protocol("WM_DELETE_WINDOW", on_closing)
+            ed_top.focus_set()
+            ed_top.grab_set()
+
+            cur_date_time = self.mas[4 * num + 1].split(' ')
+            cur_date = cur_date_time[0]
+            cur_time = cur_date_time[1]
+            cur_hour_min = cur_time.split(':')
+            cur_hour = cur_hour_min[0]
+            cur_min = cur_hour_min[1]
+            cur_date = cur_date.split('-')
+
+            cur_description = self.mas[4 * num + 2]
+
+            tim_lab = tk.Label(ed_top, text="Date:")
+            tim_lab.grid(row=0, column=0, sticky="E", columnspan=4)
+
+            cal = DateEntry(ed_top, width=10, background='darkblue',
+                            foreground='white', borderwidth=2,
+                            year=int(cur_date[0]), month=int(cur_date[1]), day=int(cur_date[2]))
+            cal.grid(column=4, row=0, sticky="NEWS")
+
+            hours = self.register(self.hours)
+            minutes = self.register(self.minutes)
+
+            hour = tk.StringVar()
+            minute = tk.StringVar()
+
+            tim_lab = tk.Label(ed_top, text="Time:")
+            tim_lab.grid(row=2, column=0, sticky="E", columnspan=2)
+
+            tim_h = tk.Entry(ed_top, validate='key', textvariable=hour, validatecommand=(hours, '%P'), width=2)
+            tim_h.grid(row=2, column=2, sticky="E")
+            hour.set(cur_hour)
+
+            two_dots = tk.Label(ed_top, text=":")
+            two_dots.grid(row=2, column=3, sticky="NEWS")
+
+            tim_m = tk.Entry(ed_top, validate='key', textvariable=minute, validatecommand=(minutes, '%P'), width=2)
+            tim_m.grid(row=2, column=4, sticky="W")
+            minute.set(cur_min)
+
+            ent_lab = tk.Label(ed_top, text="Description:")
+            ent_lab.grid(row=3, column=0, columnspan=4, sticky="NEWS")
+
+            ent = tk.Entry(ed_top, width=10)
+            ent.grid(row=3, column=4, sticky="NEWS")
+            ent.insert(0, cur_description)
+
+            imp = tk.IntVar()
+            imp_che = tk.Checkbutton(ed_top, text="Important reminder", variable=imp, onvalue=1, offvalue=0)
+            imp_che.grid(row=4, column=0, columnspan=5, sticky="NEWS")
+            if (4*num+1 in self.imp_list):
+                imp.set(1)
+            old_imp = imp.get()
+
+            B = tk.Button(ed_top, text="OK", command=ed_sel)
+            B.grid(row=5, column=0, columnspan=5, sticky="NEWS")
+
+            ed_top.wait_window()
 
     def add_rem(self):
 
@@ -194,7 +338,6 @@ class ToD(Application):
                     add_el(date_inp)
                     self.list.set(self.mas)
                     self.color_change(date_inp, 4)
-                    self.outdated_events()
                     if (imp.get()):
                         self.imp_list.append(date_inp+1)
                         self.Rlist.itemconfig(date_inp+1, foreground="red")
