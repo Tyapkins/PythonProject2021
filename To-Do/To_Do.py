@@ -112,6 +112,7 @@ class ToD(Application):
         for number in self.imp_list:
             self.Rlist.itemconfig(number, foreground="red")
         self.im_count.set(len(self.imp_list))
+        #self.outdated_events()
 
     def go_back(self):
         """Return to main menu."""
@@ -120,7 +121,7 @@ class ToD(Application):
         self.back.grid(sticky="NEWS")
 
     def new_num(self):
-        nums = self.Rlist.get(1)
+        nums = self.Rlist.get(self.out_of_date()+1)
         curin_date = datetime.datetime.strptime(nums, "%Y-%m-%d %H:%M:%S")
         ddif = curin_date - datetime.datetime.now()
         hdif = ddif.seconds // 3600
@@ -136,7 +137,12 @@ class ToD(Application):
             self.mas = self.mas[:4*date_num] + self.mas[4*(date_num+1):]
         else:
             self.mas = self.mas[:4*date_num]
+        self.remove_outdated(4*date_num, self.out_of_date(), self.out_of_date()-4)
 
+    def remove_outdated(self, date, counter, bottom_line):
+        if (counter > date):
+            for num in range(bottom_line, counter):
+                self.Rlist.itemconfig(num, bg="white")
 
     def color_change(self, date_inp, shift):
         for i in range(len(self.mas)):
@@ -154,7 +160,7 @@ class ToD(Application):
             check = self.Rlist.get(count + 1)
         return count
 
-     def ed_rem(self):
+    def ed_rem(self):
 
         def on_closing():
             if changed():
@@ -338,6 +344,7 @@ class ToD(Application):
                     add_el(date_inp)
                     self.list.set(self.mas)
                     self.color_change(date_inp, 4)
+                    self.outdated_events()
                     if (imp.get()):
                         self.imp_list.append(date_inp+1)
                         self.Rlist.itemconfig(date_inp+1, foreground="red")
@@ -419,7 +426,18 @@ class ToD(Application):
             else:
                 self.new_num()
         self.im_count.set(len(self.imp_list))
-        
+        self.outdated_events()
+
+    def out_of_date_vars(self):
+        count = self.out_of_date()
+        if (count):
+            self.ev_count.set(self.ev_count.get()[0])
+            self.ev_count.set(self.ev_count.get() + ", and {a} of them outdated".format(a=count//4))
+            im_out = len([ev for ev in range(1, count, 4) if ev in self.imp_list])
+            self.im_count.set(self.im_count.get()[0])
+            if (im_out):
+                self.im_count.set(self.im_count.get() + ", and {a} of them outdated".format(a=im_out))
+
     def to_file(self):
         got_date = False
         date = ''
@@ -454,7 +472,26 @@ class ToD(Application):
         self.list.set(self.mas)
         self.set_imp()
         self.new_num()
+        retired = self.out_of_date()
+        if (retired):
+            if tk.messagebox.askyesno("Out Of Date", "Some of Reminders are out of date.\nDo you want to delete them?"):
+                self.mas = self.mas[retired:]
+                self.list.set(self.mas)
+                self.remove_outdated(-1, self.Rlist.size(), 0)
+            else:
+                self.outdated_events()
 
+
+    def out_of_date(self):
+        return self.date_in(datetime.datetime.now())
+
+    def outdated_events(self):
+        outdate = self.out_of_date()
+        for num in range(outdate):
+            self.Rlist.itemconfig(num, bg="lightgray", foreground="gray")
+            if num in self.imp_list:
+                self.Rlist.itemconfig(num, foreground="tomato")
+        self.out_of_date_vars()
 
 
 
