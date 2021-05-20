@@ -58,7 +58,6 @@ class weather_day(tk.Frame):
 
     def fill_extra(self):
         self.extra['text'] = ''
-        print(self.extra_info)
         for info in self.extra_info:
             if (info != 'wind'):
                 extra_info = ''
@@ -99,8 +98,8 @@ class WeatherApp(Application):
     """Sample Application."""
 
     def __init__(self, master=None, mainm=None, **kw):
-        master.minsize(1150, 500)
-        master.maxsize(1200, 600)
+        master.minsize(1150, 850)
+        master.maxsize(1200, 900)
         super().__init__(master=master, **kw)
         self.back = mainm
         #self.create_widgets()
@@ -108,38 +107,31 @@ class WeatherApp(Application):
 
     def create_widgets(self):
         """Widgets creation."""
-        print("Hello from widgets!")
         self.appid = tk.StringVar()
-        self.appid.set("d83a96348dfb13f8e92f0ae8929e1eff")
-
         self.city_id = 0
-
         self.city = tk.StringVar()
-        self.city.set('Tver')
-
         self.units = tk.StringVar()
-        self.units.set('metric')
 
         self.grad = " °C"
 
         self.details = tk.IntVar()
-        self.details.set(0)
-
         self.lang = tk.StringVar()
-        self.lang.set('en')
-
-        self.find_city()
+        self.defaults()
 
         self.days = ['']
 
-        #self.weatherButton = tk.Button(self, text="Weather for now!", command=self.getweather)
-        #self.weatherButton.grid(row=1, column=0, sticky="NEWS")
 
-        #self.forecastButton = tk.Button(self, text="Forecast!", command=self.forecast)
-        #self.forecastButton.grid(row=2, column=0, sticky="NEWS")
+        self.weatherButton = tk.Button(self, text="Weather in a moment", command=self.weather_now_update)
+        self.weatherButton.grid(row=1, column=0, sticky="NEWS", rowspan=2)
+
+        self.weather_now()
+
+        self.separ = ttk.Separator(self, orient='horizontal')
+        self.separ.grid(row=3, column=0, columnspan=4, sticky="WE", pady=5, ipady=5)
+
 
         self.weathers = ttk.Notebook(self)
-        self.weathers.grid(row=3, column=0, sticky="NEWS")
+        self.weathers.grid(row=4, column=0, sticky="NEWS", columnspan=2)
 
         self.three_days = ttk.Frame(self.weathers, width=300, height=200)
         self.five_days = ttk.Frame(self.weathers, width=300, height=200)
@@ -163,38 +155,10 @@ class WeatherApp(Application):
         self.three_days_list = []
         self.three_buttons = []
         self.fill_mas(self.three_days_list, self.three_buttons, self.three_days, 47, 3)
-        #for i in range(3):
-        #    new_day = self.days[i]
-        #    self.three_days_list.append('')
-        #    extra_info = new_day['extra'] if self.details.get() != 0 else {}
-        #    self.three_days_list[i] = weather_day(master=self.three_days, max_width=47,
-        #                                          icon_num=new_day['icon']+"@4x",
-        #                                          temp=str(new_day['temp'])+self.grad,
-        #                                          date=new_day['date'], descrip=new_day['description'],
-        #                                          extra=extra_info)
-        #    self.three_days_list[i].grid(row=0, column=i, sticky="NEWS")
-
-        #    self.three_buttons.append('')
-        #    self.three_buttons[i] = tk.Button(master=self.three_days,
-        #                                      command=(lambda x=new_day['date'].day: self.more(x)),
-        #                                      text="More Information")
-        #    self.three_buttons[i].grid(row=1, column=i, sticky="NEWS")
-
 
         self.five_days_list = []
         self.five_buttons = []
         self.fill_mas(self.five_days_list, self.five_buttons, self.five_days, 28, 5)
-
-        #for i in range(5):
-        #    new_day = self.days[i]
-        #    self.five_days_list.append('')
-        #     extra_info = self.days[i]['extra'] if self.details.get() != 0 else {}
-        #    self.five_days_list[i] = weather_day(master=self.five_days,
-        #                                          icon_num=new_day['icon']+"@2x",
-        #                                          temp=str(new_day['temp'])+self.grad,
-        #                                          date=new_day['date'], descrip=new_day['description'],
-        #                                         extra=extra_info)
-        #    self.five_days_list[i].grid(row=0, column=i, sticky="NEWS")
 
         self.link = "http://openweathermap.org/img/wn/"
 
@@ -209,6 +173,30 @@ class WeatherApp(Application):
         self.menubar.add_cascade(label="Menu", menu=self.filemenu)
 
         self.master.config(menu=self.menubar)
+
+    def defaults(self):
+        self.appid.set("d83a96348dfb13f8e92f0ae8929e1eff")
+        self.city.set('Tver')
+        self.units.set('metric')
+        self.grad = " °C"
+        self.details.set(0)
+        self.lang.set('en')
+        self.find_city()
+
+    def weather_now(self):
+        day = self.make_day(self.getweather())
+        extra_info = day['extra'] if self.details.get() != 0 else {}
+        self.wnow = weather_day(master=self,
+                                icon_num=day['icon']+"@4x",
+                                temp=str(day['temp'])+self.grad,
+                                date=day['date'], descrip=day['description'],
+                                extra=extra_info)
+        self.wnow.grid(row=1, column=1, rowspan=2)
+
+    def weather_now_update(self):
+        self.check_changes(self.wnow, self.getweather())
+
+
 
     def fill_mas(self, mas, buttons, tab, section_width, max_size):
         for i in range(max_size):
@@ -256,10 +244,13 @@ class WeatherApp(Application):
                                             descrip=new_day['description'],
                                             extra=extra_info,
                                             max_width=40)
-                mas_days[i].grid(row=i//4, column=i%4, sticky="NEWS")
+                mas_days[i].grid(row=(i//4)*2, column=i%4, sticky="NEWS")
+
+            sep = ttk.Separator(top, orient='horizontal')
+            sep.grid(row=1, column=0, columnspan=4, sticky="WE", pady=5, ipady=5)
 
             quit_button = tk.Button(top, text="Close", command=top.destroy)
-            quit_button.grid(column=0, columnspan=4, row=2)
+            quit_button.grid(column=0, columnspan=4, row=3, sticky="WE")
 
             return top
 
@@ -280,7 +271,7 @@ class WeatherApp(Application):
     def settings(self):
 
         def on_closing():
-            if tk.messagebox.askyesno("Quit", "Do you want to quit?\nTo save your reminder, you have to press OK"):
+            if tk.messagebox.askyesno("Quit", "Do you want to quit?\nTo save your settings, you have to press OK"):
                 top.destroy()
 
         top = tk.Toplevel(self)
@@ -338,6 +329,8 @@ class WeatherApp(Application):
         self.grad = " °C" if (self.units.get() == "metric") else " °F" if (self.units.get() =="imperial") else " °K"
         cast = self.forecast()
 
+        self.weather_now_update()
+
         for i in range(len(self.three_days_list)):
             for day in cast:
                 if (str(day['dt_txt']) == str(self.three_days_list[i].date)):
@@ -375,7 +368,12 @@ class WeatherApp(Application):
             data = res.json()
             self.city_id = data['list'][0]['id']
         except Exception as e:
-            print("Exception (find):", e)
+            #print("Exception (find):", e)
+            tk.messagebox.showerror("City Error",
+                                    "It seems, entered city does not exist.\n"
+                                    "It has been restored to default.\nPlease, check spelling of that city!")
+            self.defaults()
+            self.find_city()
             pass
 
     def getweather(self):
@@ -383,12 +381,14 @@ class WeatherApp(Application):
             res = requests.get("http://api.openweathermap.org/data/2.5/weather",
                                params={'id': self.city_id, 'units': self.units.get(), 'lang': self.lang.get(), 'APPID': self.appid.get()})
             data = res.json()
-            print("conditions:", data['weather'][0]['description'])
-            print("temp:", data['main']['temp'])
-            print("temp_min:", data['main']['temp_min'])
-            print("temp_max:", data['main']['temp_max'])
+            data['dt_txt'] = str(datetime.datetime.now()).split('.')[0]
+            return data
         except Exception as e:
-            print("Exception (weather):", e)
+            tk.messagebox.showerror("Settings Error",
+                                    "It seems, your settings are incorrect.\n"
+                                    "It has been restored to defaults.\nPlease, check them!")
+            self.defaults()
+            return self.getweather()
             pass
 
     def forecast(self):
@@ -398,5 +398,9 @@ class WeatherApp(Application):
             data = res.json()
             return data['list']
         except Exception as e:
-            print("Exception (forecast):", e)
-            pass
+            #print("Exception (forecast):", e)
+            tk.messagebox.showerror("API Error",
+                                    "It seems, that your API is incorrect.\n"
+                                    "It has been restored to defaults.\nPlease, check your API!")
+            self.defaults()
+            return self.forecast()
