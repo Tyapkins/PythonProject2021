@@ -1,0 +1,453 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-06-08 10:43+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: Entertainment/Entertainment.py:69 Entertainment/Graph.py:77 Main_App.py:31
+#: To-Do/change_window.py:68 Weather/weather.py:210
+msgid "Quit"
+msgstr "Выйти"
+
+#: Main_App.py:35
+msgid "To-Do List"
+msgstr "Список дел"
+
+#: Main_App.py:39
+msgid "Weather"
+msgstr "Погода"
+
+#: Main_App.py:47
+msgid "Application"
+msgstr "Приложения"
+
+#: Main_App.py:56
+msgid "Entertainment"
+msgstr "Развлечения"
+
+#: Entertainment/Entertainment.py:26
+msgid "Tag Game"
+msgstr "Пятнашки"
+
+#: Entertainment/Entertainment.py:45
+msgid "Simple Graphics"
+msgstr "Простой граф. редактор"
+
+#: Entertainment/Entertainment.py:59
+msgid "Tic-tac-toe"
+msgstr "Крестики-нолики"
+
+#: Entertainment/Entertainment.py:75 To-Do/To_Do.py:26 Weather/weather.py:92
+msgid "Go to Main Menu"
+msgstr "Вернуться в главное меню"
+
+#: Entertainment/Entertainment.py:77 To-Do/To_Do.py:27 Weather/weather.py:94
+#: Weather/weather.py:181
+msgid "Close"
+msgstr "Закрыть"
+
+#: Entertainment/Entertainment.py:78 To-Do/To_Do.py:28 Weather/weather.py:95
+msgid "Menu"
+msgstr "Меню"
+
+#: Entertainment/Graph.py:52
+msgid "Fill"
+msgstr "Заливка"
+
+#: Entertainment/Graph.py:55
+msgid "Border"
+msgstr "Граница"
+
+#: Entertainment/Graph.py:58
+msgid "Width:"
+msgstr "Ширина"
+
+#: Entertainment/TagGame.py:101
+msgid "Congratulations!"
+msgstr "Поздравляем!"
+
+#: Entertainment/TagGame.py:101
+msgid "You win!"
+msgstr "Вы победили!"
+
+#: Entertainment/TagGame.py:103
+msgid "One more game?"
+msgstr "Ещё партейку?"
+
+#: Entertainment/TagGame.py:103
+msgid "Do you want to play again?"
+msgstr "Хотите сыграть снова?"
+
+#: Entertainment/TagGame.py:126
+msgid "Exit"
+msgstr "Выход"
+
+#: Entertainment/TagGame.py:128
+msgid "New"
+msgstr "Заново"
+
+#: Entertainment/TagGame.py:129
+msgid "Size"
+msgstr "Размер"
+
+#: Entertainment/TagGame.py:158
+msgid "Size:"
+msgstr "Размер:"
+
+#: To-Do/To_Do.py:16 To-Do/change_window.py:211
+msgid "There's no reminders yet!"
+msgstr "Напоминаний ещё нет!"
+
+#: To-Do/To_Do.py:17
+msgid "Next event:"
+msgstr "Следующее событие:"
+
+#: To-Do/To_Do.py:18
+msgid "No events yet!"
+msgstr "Событий ещё нет!"
+
+#: To-Do/To_Do.py:19
+msgid "Number of All Reminders:"
+msgstr "Количество всех напоминаний:"
+
+#: To-Do/To_Do.py:20
+msgid "Number of Important Reminders:"
+msgstr "Количество важных напоминаний:"
+
+#: To-Do/To_Do.py:21
+msgid "Add a Reminder"
+msgstr "Добавить напоминание"
+
+#: To-Do/To_Do.py:22
+msgid "Edit the Reminder"
+msgstr "Отредактировать напоминание"
+
+#: To-Do/To_Do.py:23
+msgid "Delete the Reminder"
+msgstr "Удалить напоминание"
+
+#: To-Do/To_Do.py:24
+msgid "Save Configuration"
+msgstr "Сохранить напоминания"
+
+#: To-Do/To_Do.py:25
+msgid "Load Configuration"
+msgstr "Загрузить напоминания"
+
+#: To-Do/To_Do.py:146
+msgid ""
+"{t}\n"
+"\n"
+"{d} days, {h} hours and {m} minutes left"
+msgstr ""
+"{t}\n"
+"\n"
+"{d} дней, {h} часов и {m} минут осталось"
+
+#: To-Do/To_Do.py:198
+msgid "Edit Error"
+msgstr "Ошибка редактирования"
+
+#: To-Do/To_Do.py:199
+msgid "Choose Reminder to Edit!"
+msgstr "Выберите напоминание для редактирования!"
+
+#: To-Do/To_Do.py:235
+msgid "Delete Error"
+msgstr "Ошибка удаления"
+
+#: To-Do/To_Do.py:236
+msgid "Choose Reminder to Delete!"
+msgstr "Выберите напоминание для удаления!"
+
+#: To-Do/To_Do.py:261 To-Do/To_Do.py:268
+msgid ", and {a} of them outdated"
+msgstr ", и {a} из них устарели"
+
+#: To-Do/To_Do.py:310
+msgid "Out Of Date"
+msgstr "Кое-что неактуально"
+
+#: To-Do/To_Do.py:311
+msgid ""
+"Some of Reminders are out of date.\n"
+"Do you want to delete them?"
+msgstr ""
+
+#: To-Do/change_window.py:69
+msgid ""
+"Do you want to quit?\n"
+"To save the changes,you have to press OK"
+msgstr ""
+"Некоторые напоминания устарели.\n"
+"Хотите их удалить?"
+
+#: To-Do/change_window.py:94
+msgid "Date:"
+msgstr "Дата:"
+
+#: To-Do/change_window.py:108
+msgid "Time:"
+msgstr "Время:"
+
+#: To-Do/change_window.py:130
+msgid "Description:"
+msgstr "Описание:"
+
+#: To-Do/change_window.py:138
+msgid "Important reminder"
+msgstr "Важность напоминания"
+
+#: To-Do/change_window.py:178
+msgid "Time Error"
+msgstr "Ошибка времени"
+
+#: To-Do/change_window.py:179
+msgid "Input hours and minutes!"
+msgstr "Введите часы и минуты!"
+
+#: To-Do/change_window.py:185
+msgid "Description Error"
+msgstr "Ошибка описания"
+
+#: To-Do/change_window.py:186
+msgid "Input the description!"
+msgstr "Введите описание!"
+
+#: To-Do/change_window.py:199
+msgid "Wrong data"
+msgstr "Неверные данные"
+
+#: To-Do/change_window.py:200
+msgid ""
+"Time travel, huh?\n"
+"Why do you need a reminderto a previous events?\n"
+"Change the date!"
+msgstr ""
+"Путешествуем во времени, значтся?\n"
+"Зачем нужно напоминание о прошедшем событии?\n"
+"Поменяйте дату!"
+
+#: Weather/day.py:55
+msgid "↑ N"
+msgstr "↑ С"
+
+#: Weather/day.py:55
+msgid "↗ NNE"
+msgstr "↗ ССВ"
+
+#: Weather/day.py:55
+msgid "↗ NE"
+msgstr "↗ СВ"
+
+#: Weather/day.py:55
+msgid "↗ ENE"
+msgstr "↗ ВСВ"
+
+#: Weather/day.py:56
+msgid "→ E"
+msgstr "→ В"
+
+#: Weather/day.py:56
+msgid "↘ ESE"
+msgstr "↘ ВЮВ"
+
+#: Weather/day.py:56
+msgid "↘ SE"
+msgstr "↘ ВЮ"
+
+#: Weather/day.py:56
+msgid "↘ SSE"
+msgstr "↘ ЮЮВ"
+
+#: Weather/day.py:57
+msgid "↓ S"
+msgstr "↓ Ю"
+
+#: Weather/day.py:57
+msgid "↙ SSW"
+msgstr "↙ ЮЮЗ"
+
+#: Weather/day.py:57
+msgid "↙ SW"
+msgstr "↙ ЮЗ"
+
+#: Weather/day.py:57
+msgid "↙ WSW"
+msgstr "↙ ЗЮЗ"
+
+#: Weather/day.py:58
+msgid "← W"
+msgstr "← З"
+
+#: Weather/day.py:58
+msgid "↖ WNW"
+msgstr "↖ ЗСЗ"
+
+#: Weather/day.py:58
+msgid "↖ NW"
+msgstr "↖ СЗ"
+
+#: Weather/day.py:58
+msgid "↖ NNW"
+msgstr "↖ ССЗ"
+
+#: Weather/day.py:69 Weather/day.py:75 Weather/weather.py:192
+msgid "Air Humidity"
+msgstr "Влажность воздуха"
+
+#: Weather/day.py:71 Weather/day.py:76 Weather/weather.py:190
+msgid "Temperature feels like"
+msgstr "Ощущается как"
+
+#: Weather/day.py:72 Weather/day.py:77
+msgid "hPa"
+msgstr "гПа"
+
+#: Weather/day.py:72 Weather/day.py:78 Weather/weather.py:191
+msgid "Atmosphere Pressure"
+msgstr "Атмосферное давление"
+
+#: Weather/day.py:84
+msgid "Wind Speed"
+msgstr "Скорость ветра"
+
+#: Weather/day.py:86
+msgid "Wind Direction"
+msgstr "Направление ветра"
+
+#: Weather/day.py:88
+msgid "m/s"
+msgstr "м/c"
+
+#: Weather/day.py:90
+msgid "mp/h"
+msgstr "мили/ч"
+
+#: Weather/day.py:94
+msgid "Loading picture..."
+msgstr "Загружаем картинку..."
+
+#: Weather/day.py:99
+msgid "Timeout error"
+msgstr "Ошибка времени выполнения"
+
+#: Weather/day.py:103
+msgid "HTTP error "
+msgstr "Ошибка адреса"
+
+#: Weather/weather.py:42
+msgid "Weather in a moment"
+msgstr "Погода в текущий момент"
+
+#: Weather/weather.py:58
+msgid "3 days"
+msgstr "3 дня"
+
+#: Weather/weather.py:59
+msgid "5 days"
+msgstr "5 дней"
+
+#: Weather/weather.py:90
+msgid "Settings"
+msgstr "Настройки"
+
+#: Weather/weather.py:142
+msgid "More Information"
+msgstr "Прогноз подробнее"
+
+#: Weather/weather.py:211
+msgid ""
+"Do you want to quit?\n"
+"To save your settings,you have to press OK"
+msgstr ""
+"Вы хотите выйти?\n"
+"Чтобы сохранить настройки, надо нажать кнопку ОК в главном меню"
+
+
+#: Weather/weather.py:233
+msgid "Language:"
+msgstr "Язык:"
+
+#: Weather/weather.py:242
+msgid "City:"
+msgstr "Город:"
+
+#: Weather/weather.py:251
+msgid "Units:"
+msgstr "Единицы измерения:"
+
+#: Weather/weather.py:255
+msgid "metric"
+msgstr "метрические"
+
+#: Weather/weather.py:260
+msgid "imperial"
+msgstr "имперские"
+
+#: Weather/weather.py:265
+msgid "kelvin"
+msgstr "Кельвин"
+
+#: Weather/weather.py:270
+msgid "Detailed settings"
+msgstr "Подробные настройки"
+
+#: Weather/weather.py:274
+msgid "Detailed Forecast"
+msgstr "Подробный прогноз"
+
+#: Weather/weather.py:338
+msgid "City Error"
+msgstr "Ошибка города"
+
+#: Weather/weather.py:339
+msgid ""
+"It seems, entered city does not exist.\n"
+"It has been restored to default.\n"
+"Please, check spelling of that city!"
+msgstr ""
+"Видимо, введённого города не существует.\n"
+"Установлен город по умолчанию.\n"
+"Пожалуйста, проверьте написание названия города!"
+
+#: Weather/weather.py:358
+msgid "Settings Error"
+msgstr "Ошибка настроек"
+
+#: Weather/weather.py:359
+msgid ""
+"It seems, your settingsare incorrect.\n"
+"It has been restored to defaults.\n"
+"Please, check them!"
+msgstr ""
+"Видимо, Ваши настройки некорректны.\n"
+"Восстановлены настройки по умолчанию.\n"
+"Пожалуйста, проверьте их!"
+
+#: Weather/weather.py:377
+msgid "API Error"
+msgstr "Ошибка с API"
+
+#: Weather/weather.py:378
+msgid ""
+"It seems, that your API is incorrect.\n"
+"It has been restored to defaults.\n"
+"Please, check your API!"
+msgstr ""
+"Видимо, ввёденный Вами API некорректен.\n"
+"Установлен API по умолчанию.\n"
+"Пожалуйста, проверьте Ваш API!"
+
