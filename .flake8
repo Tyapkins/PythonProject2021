@@ -1,0 +1,3 @@
+[flake8]
+builtins = _, ngettext
+ignore = E402, E226
