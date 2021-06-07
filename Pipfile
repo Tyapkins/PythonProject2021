@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 pybabel = "*"
 babel = "*"
-request = "*"
+requests = "*"
 
 [dev-packages]
 
