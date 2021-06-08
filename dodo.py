@@ -69,6 +69,9 @@ def task_gen_clean():
 
 def up():
     os.chdir("..")
+    
+def down_to_tests():
+    os.chdir("tests")
 
 def task_source():
     """Create source distribution."""
@@ -99,4 +102,8 @@ def task_pydocstyle():
 def task_sphinx():
     """Sphinx documentation."""
     return {'actions': ['sphinx-build -M html docs build'], }
+    
+def task_test():
+    """Tests."""
+    return {'actions': [down_to_tests, 'python3 -m unittest']}
 

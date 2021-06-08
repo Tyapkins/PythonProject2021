@@ -7,6 +7,10 @@ name = "pypi"
 pybabel = "*"
 babel = "*"
 requests = "*"
+pillow = "*"
+pil = "*"
+python3-pil = '*'
+python3-pil.imagetk = "*"
 
 [dev-packages]
 PyPackage

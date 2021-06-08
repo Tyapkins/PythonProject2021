@@ -1,5 +1,6 @@
 PyProj
 pillow
+python3-pil
 python3-pil.imagetk
 pybabel
 build
