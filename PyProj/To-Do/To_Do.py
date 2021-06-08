@@ -1,5 +1,4 @@
 """To-Do List."""
-import gettext
 import sys
 
 import tkinter as tk
@@ -11,7 +10,6 @@ sys.path.insert(0, '..')
 from skeleton import Application
 from change_window import change_table
 
-gettext.install(".", '.', names=("ngettext",))
 
 NO_REMINDERS = _("There's no reminders yet!")
 NEXT_EV = _("Next event:")

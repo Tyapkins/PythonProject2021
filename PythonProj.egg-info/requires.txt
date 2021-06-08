@@ -5,3 +5,5 @@ pybabel
 build
 tkcalendar
 requests
+wheel
+setuptools

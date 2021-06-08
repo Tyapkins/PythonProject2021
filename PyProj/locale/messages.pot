@@ -1,3 +1,4 @@
+
 # Translations template for PROJECT.
 # Copyright (C) 2021 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
@@ -450,4 +451,3 @@ msgstr ""
 "Видимо, ввёденный Вами API некорректен.\n"
 "Установлен API по умолчанию.\n"
 "Пожалуйста, проверьте Ваш API!"
-

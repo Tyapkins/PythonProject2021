@@ -9,10 +9,6 @@ import datetime
 
 from day import weather_day
 
-import gettext
-
-gettext.install(".", '.', names=("ngettext",))
-
 
 class WeatherApp(Application):
     """Application for weather forecast."""

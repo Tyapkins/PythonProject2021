@@ -15,6 +15,7 @@ Welcome to PythonProject2021's documentation!
    weather
    entertainment
    maths
+   day
 
 
 Indices and tables
