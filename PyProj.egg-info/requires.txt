@@ -1,0 +1,9 @@
+PyProj
+pillow
+python3-pil.imagetk
+pybabel
+build
+tkcalendar
+requests
+wheel
+setuptools

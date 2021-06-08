@@ -9,6 +9,8 @@ babel = "*"
 requests = "*"
 
 [dev-packages]
+PyPackage
+Weather
 
 [requires]
 python_version = "3.8"

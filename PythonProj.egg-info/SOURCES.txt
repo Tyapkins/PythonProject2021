@@ -1,8 +1,5 @@
 pyproject.toml
 setup.cfg
-PyProj/Main_App.py
-PyProj/main.py
-PyProj/skeleton.py
 PythonProj.egg-info/PKG-INFO
 PythonProj.egg-info/SOURCES.txt
 PythonProj.egg-info/dependency_links.txt
