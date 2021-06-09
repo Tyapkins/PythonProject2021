@@ -119,9 +119,9 @@ class TTT(tk.Frame):
     def end_game(self):
         """End the game."""
         if self.turn == 1:
-            tk.messagebox.showinfo("Game over", "Computer win!")
+            tk.messagebox.showinfo(_("Game over"), _("Computer win!"))
         else:
-            tk.messagebox.showinfo("Game over", "Player 1 win!")
+            tk.messagebox.showinfo(_("Game over"), _("Player 1 win!"))
 
     def finished(self):
         """Check if someone wins or it is a draw."""
@@ -162,7 +162,7 @@ class TTT(tk.Frame):
             finish = True
         else:
             if check_draw(self.table):
-                tk.messagebox.showinfo("Game over", "It's a draw!")
+                tk.messagebox.showinfo(_("Game over"), _("It's a draw!"))
                 finish = True
         if finish:
             self.finished()
@@ -173,7 +173,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square1 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -183,7 +183,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square2 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -193,7 +193,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square3 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -203,7 +203,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square4 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -213,7 +213,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square5 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -223,7 +223,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square6 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -233,7 +233,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square7 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -243,7 +243,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square8 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -253,7 +253,7 @@ class TTT(tk.Frame):
             var = '   '
             if (self.turn == 2):
                 self.Square9 = tk.Button(self, text='o', command=self.no_more)
-                self.L = tk.Label(self, text='Turn: Player 1')
+                self.L = tk.Label(self, text=_('Turn: Player 1'))
                 self.L.grid(row=4, columnspan=4, sticky="NEWS")
                 self.turn = 1
                 var = 'o'
@@ -279,7 +279,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square1 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -293,7 +293,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square2 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -307,7 +307,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square3 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -321,7 +321,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square4 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -335,7 +335,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square5 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -349,7 +349,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square6 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -363,7 +363,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square7 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -377,7 +377,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square8 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -391,7 +391,7 @@ class TTT(tk.Frame):
         var = '   '
         if (self.turn == 1):
             self.Square9 = tk.Button(self, text='x', command=self.no_more)
-            self.L = tk.Label(self, text='Turn: Computer')
+            self.L = tk.Label(self, text=_('Turn: Computer'))
             self.L.grid(row=4, columnspan=4, sticky="NEWS")
             self.turn = 2
             var = 'x'
@@ -422,10 +422,10 @@ class TTT(tk.Frame):
         self.Square7 = tk.Button(self, text='   ', command=self.pressed7)
         self.Square8 = tk.Button(self, text='   ', command=self.pressed8)
         self.Square9 = tk.Button(self, text='   ', command=self.pressed9)
-        self.quitButton = tk.Button(self, text='Quit', command=self.quit)
-        self.newButton = tk.Button(self, text='New Game',
+        self.quitButton = tk.Button(self, text=_('Quit'), command=self.quit)
+        self.newButton = tk.Button(self, text=_('New Game'),
                                    command=self.new_game)
-        self.L = tk.Label(self, text='Turn: Player 1')
+        self.L = tk.Label(self, text=_('Turn: Player 1'))
         self.quitButton.grid(row=0, columnspan=4, sticky="NEWS")
         self.L.grid(row=4, columnspan=4, sticky="NEWS")
         self.newButton.grid(row=5, columnspan=4, sticky="NEWS")

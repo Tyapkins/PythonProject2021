@@ -5,10 +5,6 @@ import datetime
 from tkcalendar import DateEntry
 import tkinter.messagebox
 
-import gettext
-
-gettext.install(".", '.', names=("ngettext",))
-
 
 class change_table(tk.Frame):
     """Class for reminders creation and modification."""

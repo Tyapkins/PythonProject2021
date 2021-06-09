@@ -18,11 +18,10 @@ class MathApps(Application):
         master.maxsize(1200, 900)
         super().__init__(master=master, **kw)
         self.back = mainm
-        # self.create_widgets()
 
     def create_widgets(self):
         """Widgets creation."""
-        self.TagB = tk.Button(self, text="Matrix calculator",
+        self.TagB = tk.Button(self, text=_("Matrix calculator"),
                               command=self.BeginMatrix, justify='center')
         self.TagB.grid(row=0, column=0, sticky="NEWS")
 
@@ -42,7 +41,7 @@ class MathApps(Application):
         self.TagLab = tk.Label(self, image=self.TagIm, width=200, height=200)
         self.TagLab.grid(row=2, column=0, sticky="N")
 
-        self.GraphB = tk.Button(self, text="Extra features",
+        self.GraphB = tk.Button(self, text=_("Extra features"),
                                 command=self.BeginGraph)
         self.GraphB.grid(row=0, column=2, sticky="NEWS")
 
@@ -56,8 +55,8 @@ class MathApps(Application):
         self.two_three_separ = ttk.Separator(self, orient='vertical')
         self.two_three_separ.grid(row=0, column=3, rowspan=3, sticky="NS")
 
-        self.Polinoms = tk.Button(self, text="Polinomial equations"
-                                             "(up to 3-th degree)",
+        self.Polinoms = tk.Button(self, text=_("Polinomial equations"
+                                               "(up to 3-th degree)"),
                                   command=self.BeginPolinoms)
         self.Polinoms.grid(row=0, column=4, sticky="NEWS")
 
@@ -75,10 +74,10 @@ class MathApps(Application):
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
         # self.filemenu.add_command(label="Settings", command=self.settings)
         self.filemenu.add_separator()
-        self.filemenu.add_command(label="Go to Main Menu",
+        self.filemenu.add_command(label=_("Go to Main Menu"),
                                   command=self.go_back)
-        self.filemenu.add_command(label="Close", command=self.quit)
-        self.menubar.add_cascade(label="Menu", menu=self.filemenu)
+        self.filemenu.add_command(label=_("Close"), command=self.quit)
+        self.menubar.add_cascade(label=_("Menu"), menu=self.filemenu)
 
         self.master.config(menu=self.menubar)
 

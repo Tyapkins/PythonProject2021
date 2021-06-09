@@ -11,21 +11,6 @@ from skeleton import Application
 from change_window import change_table
 
 
-NO_REMINDERS = _("There's no reminders yet!")
-NEXT_EV = _("Next event:")
-NO_EV = _("No events yet!")
-REM_NUM = _("Number of All Reminders:")
-IMP_NUM = _("Number of Important Reminders:")
-ADD_REM = _("Add a Reminder")
-ED_REM = _("Edit the Reminder")
-DEL_REM = _("Delete the Reminder")
-SAVE_CONF = _("Save Configuration")
-LOAD_CONF = _("Load Configuration")
-GO_TO_MAIN = _("Go to Main Menu")
-CLOSE = _("Close")
-MENU_OPEN = _("Menu")
-
-
 class ToD(Application):
     """Create application with list of Reminders."""
 
@@ -57,7 +42,7 @@ class ToD(Application):
 
         self.Rlist.configure(justify=tk.CENTER)
 
-        self.Rlist.insert(tk.END, NO_REMINDERS)
+        self.Rlist.insert(tk.END, _("There's no reminders yet!"))
 
         self.cur_date = datetime.datetime.now().date()
         self.cur_rem = "No reminders!"
@@ -68,15 +53,15 @@ class ToD(Application):
         self.sep = ttk.Separator(self, orient="vertical")
         self.sep.grid(row=0, rowspan=6, column=1, sticky="SN")
 
-        self.near_ev = tk.Label(self, text=NEXT_EV)
+        self.near_ev = tk.Label(self, text=_("Next event:"))
         self.near_ev.grid(row=0, column=0, sticky="S")
 
         self.date_diff = tk.StringVar()
-        self.date_diff.set(NO_EV)
+        self.date_diff.set(_("No events yet!"))
         self.near_ev_date = tk.Label(self, textvariable=self.date_diff)
         self.near_ev_date.grid(row=1, column=0, sticky="NS")
 
-        self.evnum = tk.Label(self, text=REM_NUM)
+        self.evnum = tk.Label(self, text=_("Number of All Reminders:"))
         self.evnum.grid(row=2, column=0, sticky="S")
 
         self.ev_count = tk.StringVar()
@@ -85,7 +70,7 @@ class ToD(Application):
         self.ev_num = tk.Label(self, textvariable=self.ev_count)
         self.ev_num.grid(row=3, column=0, sticky="NS")
 
-        self.imnum = tk.Label(self, text=IMP_NUM)
+        self.imnum = tk.Label(self, text=_("Number of Important Reminders:"))
         self.imnum.grid(row=4, column=0, sticky="S")
 
         self.im_count = tk.StringVar()
@@ -98,16 +83,22 @@ class ToD(Application):
 
         self.menubar = tk.Menu(self)
         self.filemenu = tk.Menu(self.menubar, tearoff=0)
-        self.filemenu.add_command(label=ADD_REM, command=self.add_rem)
-        self.filemenu.add_command(label=ED_REM, command=self.ed_rem)
-        self.filemenu.add_command(label=DEL_REM, command=self.del_rem)
+        self.filemenu.add_command(label=_("Add a Reminder"),
+                                  command=self.add_rem)
+        self.filemenu.add_command(label=_("Edit the Reminder"),
+                                  command=self.ed_rem)
+        self.filemenu.add_command(label=_("Delete the Reminder"),
+                                  command=self.del_rem)
         self.filemenu.add_separator()
-        self.filemenu.add_command(label=SAVE_CONF, command=self.to_file)
-        self.filemenu.add_command(label=LOAD_CONF, command=self.from_file)
+        self.filemenu.add_command(label=_("Save Configuration"),
+                                  command=self.to_file)
+        self.filemenu.add_command(label=_("Load Configuration"),
+                                  command=self.from_file)
         self.filemenu.add_separator()
-        self.filemenu.add_command(label=GO_TO_MAIN, command=self.go_back)
-        self.filemenu.add_command(label=CLOSE, command=self.quit)
-        self.menubar.add_cascade(label=MENU_OPEN, menu=self.filemenu)
+        self.filemenu.add_command(label=_("Go to Main Menu"),
+                                  command=self.go_back)
+        self.filemenu.add_command(label=_("Close"), command=self.quit)
+        self.menubar.add_cascade(label=_("Menu"), menu=self.filemenu)
 
         self.master.config(menu=self.menubar)
 
@@ -116,9 +107,9 @@ class ToD(Application):
     def full_sel(self, event):
         """Define selection as 4-multiple."""
         nums = self.Rlist.curselection()
-        normal_nums = set(i//4 for i in nums)
+        normal_nums = set(i // 4 for i in nums)
         for num in normal_nums:
-            self.Rlist.selection_set(4*num, 4*num+3)
+            self.Rlist.selection_set(4 * num, 4 * num + 3)
 
     def set_imp(self):
         """Recolor all Reminders."""
@@ -136,30 +127,32 @@ class ToD(Application):
 
     def new_num(self):
         """Find the nearest event."""
-        nums = self.Rlist.get(self.out_of_date()+1)
+        nums = self.Rlist.get(self.out_of_date() + 1)
         curin_date = datetime.datetime.strptime(nums, "%Y-%m-%d %H:%M:%S")
         ddif = curin_date - datetime.datetime.now()
         hdif = ddif.seconds // 3600
         mdif = ddif.seconds // 60 - 60 * hdif
-        self.date_diff.set(_("{t}\n\n"
-                             "{d} days, {h} hours and "
-                             "{m} minutes left").format(
-                           t=self.Rlist.
-                           get(self.out_of_date()+2),
-                           d=ddif.days,
-                           h=hdif,
-                           m=mdif))
+        self.date_diff.set(
+            ("{t}\n\n".format(
+                t=self.Rlist.get(self.
+                                 out_of_date() + 2)) + ngettext(
+                "%d day", "%d days", ddif.days) % ddif.
+             days + ", " + ngettext("%d hour",
+                                    "%d hours",
+                                    hdif) % hdif + _(" and ") + ngettext(
+                "%d minute", "%d minutes",
+                mdif) % mdif + _(" left")))
         self.ev_count.set(self.Rlist.size() // 4)
 
     def del_el(self, date_num):
         """Delete selected reminder."""
-        if len(self.mas) > 4*date_num + 1:
-            self.mas = self.mas[:4*date_num] + self.mas[4*(date_num+1):]
+        if len(self.mas) > 4 * date_num + 1:
+            self.mas = self.mas[:4 * date_num] + self.mas[4 * (date_num + 1):]
         else:
-            self.mas = self.mas[:4*date_num]
-        self.remove_outdated(4*date_num,
+            self.mas = self.mas[:4 * date_num]
+        self.remove_outdated(4 * date_num,
                              self.out_of_date(),
-                             self.out_of_date()-4)
+                             self.out_of_date() - 4)
 
     def remove_outdated(self, date, counter, bottom_line):
         """Delete oudated reminders."""
@@ -172,7 +165,7 @@ class ToD(Application):
         for i in range(len(self.mas)):
             self.Rlist.itemconfig(i, foreground="black")
         for i in range(len(self.imp_list)):
-            if (self.imp_list[i] >= date_inp + 1)\
+            if (self.imp_list[i] >= date_inp + 1) \
                     and (self.imp_list[i] + shift > 0):
                 self.imp_list[i] += shift
             self.Rlist.itemconfig(self.imp_list[i], foreground="red")
@@ -228,24 +221,25 @@ class ToD(Application):
     def del_rem(self):
         """Delete selected reminder."""
         selected = self.Rlist.curselection()
-        new_select = set(i//4 for i in selected)
-        if not(len(new_select)):
+        new_select = set(i // 4 for i in selected)
+        if not (len(new_select)):
             tkinter.messagebox.showerror(_("Delete Error"),
                                          _("Choose Reminder to Delete!"))
         else:
             for i in new_select:
-                if (4*i+1) in self.imp_list:
-                    self.imp_list.remove(4*i+1)
-                self.color_change(4*i+1, -4)
+                if (4 * i + 1) in self.imp_list:
+                    self.imp_list.remove(4 * i + 1)
+                self.color_change(4 * i + 1, -4)
                 self.del_el(i)
             self.list.set(self.mas)
             if (self.Rlist.size() == 0):
-                self.Rlist.insert(tk.END, NO_REMINDERS)
-                self.date_diff.set(NO_EV)
+                self.Rlist.insert(tk.END, _("There's no reminders yet!"))
+                self.date_diff.set(_("No events yet!"))
                 self.ev_count.set(0)
-            elif (self.Rlist.size() == 1) and\
-                    (self.Rlist.get(tk.END) == NO_REMINDERS):
-                tkinter.messagebox.showerror("Delete Error", NO_REMINDERS)
+            elif (self.Rlist.size() == 1) and \
+                    (self.Rlist.get(tk.END) == _("There's no reminders yet!")):
+                tkinter.messagebox.showerror(_("Delete Error"),
+                                             _("There's no reminders yet!"))
             else:
                 self.new_num()
         self.im_count.set(len(self.imp_list))
@@ -256,16 +250,17 @@ class ToD(Application):
         count = self.out_of_date()
         if (count):
             self.ev_count.set(self.ev_count.get()[0])
-            self.ev_count.set(self.ev_count.get() + _(", and {a} "
-                                                      "of them outdated").
-                              format(a=count//4))
+            self.ev_count.set(self.ev_count.get() + ngettext(
+                "and %d of them is outdated", "and %d of them are outdated",
+                count // 4) % (count // 4))
             im_out = len([ev for ev in range(1, count, 4)
                           if ev in self.imp_list])
             self.im_count.set(self.im_count.get()[0])
             if (im_out):
-                self.im_count.set(self.im_count.get() + _(", and {a} "
-                                                          "of them outdated").
-                                  format(a=im_out))
+                self.im_count.set(self.im_count.get() + ngettext(
+                    "and %d of them is outdated",
+                    "and %d of them are outdated",
+                    im_out) % im_out)
 
     def to_file(self):
         """Write configuration to file."""
@@ -273,10 +268,12 @@ class ToD(Application):
         date = ''
         important = False
         with open('test.txt', 'w') as f:
-            for num, elem in enumerate(self.Rlist.get(0, self.Rlist.size())):
-                if (elem != ''):
-                    if (got_date):
-                        f.write(date+';'+elem+';'+str(important)+'\n')
+            for num, elem in enumerate(self.Rlist.get(0,
+                                                      self.Rlist.size())):
+                if elem != '':
+                    if got_date:
+                        f.write(
+                            date + ';' + elem + ';' + str(important) + '\n')
                         got_date = False
                     else:
                         date = elem
@@ -296,8 +293,8 @@ class ToD(Application):
                 events.append(new_mas[1])
                 events.append('')
                 if (int(new_mas[2])):
-                    if 4*num+1 not in self.imp_list:
-                        self.imp_list.append(4*num+1)
+                    if 4 * num + 1 not in self.imp_list:
+                        self.imp_list.append(4 * num + 1)
                 num += 1
         self.mas = events
         self.list.set(self.mas)
@@ -320,7 +317,7 @@ class ToD(Application):
                     self.imp_list.pop(num)
                 self.set_imp()
                 self.remove_outdated(-1, self.Rlist.size(), 0)
-                self.ev_count.set(self.Rlist.size()//4)
+                self.ev_count.set(self.Rlist.size() // 4)
             else:
                 self.outdated_events()
 
@@ -339,12 +336,16 @@ class ToD(Application):
 
     def hours(self, text):
         """Check hours field."""
-        return not(text) or ((all([i.isdigit()
-                             for i in text]) and (0 <= int(text) <= 23)) and (
-                             len(text) <= 2))
+        return \
+            (not text) or (all([i.
+                               isdigit() for i in text]) and (
+                                   0 <= int(text) <= 23)) and \
+            (len(text) <= 2)
 
     def minutes(self, text):
         """Check minutes field."""
-        return not(text) or ((all([i.isdigit()
-                              for i in text]) and (0 <= int(text) <= 59)) and (
-                             len(text) <= 2))
+        return \
+            (not text) or (all([i.
+                               isdigit() for i in text]) and (
+                                   0 <= int(text) <= 59)) and \
+            (len(text) <= 2)

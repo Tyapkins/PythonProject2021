@@ -47,7 +47,8 @@ class Polinom(tk.Frame):
         self.E4.grid(row=3, column=1, sticky="NEWS")
         self.E5 = tk.Entry(self)
         self.E5.grid(row=4, column=1, sticky="NEWS")
-        self.D = tk.Label(self, text="solve for f(x)=ax^3 + bx^2 + c^x + d=0")
+        self.D = tk.Label(self,
+                          text=_("solve for f(x)=ax^3 + bx^2 + c^x + d=0"))
         self.D.grid(row=5, columnspan=3, sticky="NEWS")
         self.L = tk.Label(self)
         self.L.grid(row=6, columnspan=3, sticky="NEWS")
@@ -85,8 +86,8 @@ def solve(a, b, c, d, e):
             if c == 0:
                 if d == 0:
                     if e:
-                        return "No solutions"
-                    return "Infinitetly many solutions"
+                        return _("No solutions")
+                    return _("Infinitetly many solutions")
                 return "x = {s:^10}".format(s=-e/d)
             D = d ** 2 - 4 * c * e
             x1 = (-d - D ** (1/2))/(2 * c)

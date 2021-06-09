@@ -47,23 +47,50 @@ def task_com():
            }
 
 def del_all():
-    subprocess.call('rm -r -f ./locale', shell=True)
+    subprocess.call('rm -r -f ./locale/messages.pot', shell=True)
+    subprocess.call('rm -r -f ./locale/ru/LC_MESSAGES/messages.po', shell=True)
     subprocess.call('rm -r -f ../dist', shell=True)
     subprocess.call('rm -r -f ../__pycache__', shell=True)
     subprocess.call('rm -r -f ./__pycache__', shell=True)
     subprocess.call('rm -r -f ./Application/__pycache__', shell=True)
     subprocess.call('rm -r -f ./Entertainment/__pycache__', shell=True)
     subprocess.call('rm -r -f ./Weather/__pycache__', shell=True)
+    subprocess.call('rm -r -f ./tests/__pycache__', shell=True)
     subprocess.call('rm -r -f ./To-Do/__pycache__', shell=True)
     subprocess.call('rm -r -f ../build', shell=True)
-    subprocess.call('rm -r -f ../PythonProj.egg-info', shell=True)
+    subprocess.call('rm -r -f ../PyProj.egg-info', shell=True)
+
+    
+def del_sphinx():
+    subprocess.call('rm -r -f ./source/Applications.rst', shell=True)
+    subprocess.call('rm -r -f ./source/change_window.rst', shell=True)
+    subprocess.call('rm -r -f ./source/day.rst', shell=True)
+    subprocess.call('rm -r -f ./source/Entertainment.rst', shell=True)
+    subprocess.call('rm -r -f ./source/Graph.rst', shell=True)
+    subprocess.call('rm -r -f ./source/main.rst', shell=True)
+    subprocess.call('rm -r -f ./source/Main_App.rst', shell=True)
+    subprocess.call('rm -r -f ./source/modules.rst', shell=True)
+    subprocess.call('rm -r -f ./source/Polinoms.rst', shell=True)
+    subprocess.call('rm -r -f ./source/skeleton.rst', shell=True)
+    subprocess.call('rm -r -f ./source/TagGame.rst', shell=True)
+    subprocess.call('rm -r -f ./source/test_check_draw.rst', shell=True)
+    subprocess.call('rm -r -f ./source/test_check_possible_win.rst', shell=True)
+    subprocess.call('rm -r -f ./source/test_sign.rst', shell=True)
+    subprocess.call('rm -r -f ./source/test_solve.rst', shell=True)
+    subprocess.call('rm -r -f ./source/Tic_tac_toe.rst', shell=True)
+    subprocess.call('rm -r -f ./source/To_Do.rst', shell=True)
+    subprocess.call('rm -r -f ./source/weather.rst', shell=True)
+    subprocess.call('rm -r -f ./build', shell=True)
+
+def del_po():
+    subprocess.call('rm -r -f ./locale/ru/LC_MESSAGES/messages.po', shell=True)
 
 
 
 def task_gen_clean():
     """Delete generated files."""
     return {
-            'actions': [del_all],
+            'actions': [del_sphinx, del_all],
            }
 
 
@@ -86,7 +113,6 @@ def task_wheel():
             'actions': [up,
             'python3 -m build -w'
             ],
-            'task_dep': ['upd', 'com'],
            }
 
 def task_flake8():
@@ -101,7 +127,24 @@ def task_pydocstyle():
 
 def task_sphinx():
     """Sphinx documentation."""
-    return {'actions': ['sphinx-build -M html docs build'], }
+    return {'actions': ['sphinx-apidoc -o source To-Do',
+                        'sphinx-apidoc -o source Weather',
+                        'sphinx-apidoc -o source Application',
+                        'sphinx-apidoc -o source Entertainment',
+                        'sphinx-apidoc -o source tests',
+                        'sphinx-apidoc -o source .',
+                        'make html',
+                        'google-chrome build/html/genindex.html'
+    ], }
+    
+def task_clean_sphinx():
+   """Cleaning sphinx."""
+   return {'actions': [del_sphinx]}
+   
+
+def task_full_clean():
+   """Full clean-up."""
+   return {'actions': [del_sphinx, del_all, del_po]}
     
 def task_test():
     """Tests."""
