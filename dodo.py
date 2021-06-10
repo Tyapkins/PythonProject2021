@@ -47,8 +47,8 @@ def task_com():
            }
 
 def del_all():
-    subprocess.call('rm -r -f ./locale/messages.pot', shell=True)
-    subprocess.call('rm -r -f ./locale/ru/LC_MESSAGES/messages.po', shell=True)
+    subprocess.call('rm -f ./locale/messages.pot', shell=True)
+    subprocess.call('rm -f ./locale/ru/LC_MESSAGES/messages.po', shell=True)
     subprocess.call('rm -r -f ../dist', shell=True)
     subprocess.call('rm -r -f ../__pycache__', shell=True)
     subprocess.call('rm -r -f ./__pycache__', shell=True)
@@ -62,28 +62,28 @@ def del_all():
 
     
 def del_sphinx():
-    subprocess.call('rm -r -f ./source/Applications.rst', shell=True)
-    subprocess.call('rm -r -f ./source/change_window.rst', shell=True)
-    subprocess.call('rm -r -f ./source/day.rst', shell=True)
-    subprocess.call('rm -r -f ./source/Entertainment.rst', shell=True)
-    subprocess.call('rm -r -f ./source/Graph.rst', shell=True)
-    subprocess.call('rm -r -f ./source/main.rst', shell=True)
-    subprocess.call('rm -r -f ./source/Main_App.rst', shell=True)
-    subprocess.call('rm -r -f ./source/modules.rst', shell=True)
-    subprocess.call('rm -r -f ./source/Polinoms.rst', shell=True)
-    subprocess.call('rm -r -f ./source/skeleton.rst', shell=True)
-    subprocess.call('rm -r -f ./source/TagGame.rst', shell=True)
-    subprocess.call('rm -r -f ./source/test_check_draw.rst', shell=True)
-    subprocess.call('rm -r -f ./source/test_check_possible_win.rst', shell=True)
-    subprocess.call('rm -r -f ./source/test_sign.rst', shell=True)
-    subprocess.call('rm -r -f ./source/test_solve.rst', shell=True)
-    subprocess.call('rm -r -f ./source/Tic_tac_toe.rst', shell=True)
-    subprocess.call('rm -r -f ./source/To_Do.rst', shell=True)
-    subprocess.call('rm -r -f ./source/weather.rst', shell=True)
+    subprocess.call('rm -f ./source/Applications.rst', shell=True)
+    subprocess.call('rm -f ./source/change_window.rst', shell=True)
+    subprocess.call('rm -f ./source/day.rst', shell=True)
+    subprocess.call('rm -f ./source/Entertainment.rst', shell=True)
+    subprocess.call('rm -f ./source/Graph.rst', shell=True)
+    subprocess.call('rm -f ./source/main.rst', shell=True)
+    subprocess.call('rm -f ./source/Main_App.rst', shell=True)
+    subprocess.call('rm -f ./source/modules.rst', shell=True)
+    subprocess.call('rm -f ./source/Polinoms.rst', shell=True)
+    subprocess.call('rm -f ./source/skeleton.rst', shell=True)
+    subprocess.call('rm -f ./source/TagGame.rst', shell=True)
+    subprocess.call('rm -f ./source/test_check_draw.rst', shell=True)
+    subprocess.call('rm -f ./source/test_check_possible_win.rst', shell=True)
+    subprocess.call('rm -f ./source/test_sign.rst', shell=True)
+    subprocess.call('rm -f ./source/test_solve.rst', shell=True)
+    subprocess.call('rm -f ./source/Tic_tac_toe.rst', shell=True)
+    subprocess.call('rm -f ./source/To_Do.rst', shell=True)
+    subprocess.call('rm -f ./source/weather.rst', shell=True)
     subprocess.call('rm -r -f ./build', shell=True)
 
 def del_po():
-    subprocess.call('rm -r -f ./locale/ru/LC_MESSAGES/messages.po', shell=True)
+    subprocess.call('rm -f ./locale/ru/LC_MESSAGES/messages.po', shell=True)
 
 
 
